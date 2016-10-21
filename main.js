@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Weather from './components/Weather/Weather';
+import App from './components/App';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import './components/styles.scss';
 
 render(
-    <Weather/>,
+    <App/>,
     document.getElementById('container')
 );

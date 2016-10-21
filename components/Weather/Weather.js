@@ -3,6 +3,10 @@ import superagent from 'superagent';
 import jsonp from 'superagent-jsonp';
 import { apiKey, lat, lon } from '../../config';
 
+function fahrenheitToCensius(temp) {
+    return (temp - 32) * 5 / 9;
+}
+
 export default class Weather extends Component {
 
     constructor(props) {
@@ -28,11 +32,14 @@ export default class Weather extends Component {
     }
 
     render() {
+        let tempInFahrenheit = this.state.forecast.currently.temperature;
+        let tempInCelsius = fahrenheitToCensius(tempInFahrenheit);
         return (
             <div>
-                <h2>Title of component</h2>
-                <p>Paragraph text</p>
+                <h2>Weather at Nuffield Industrial Estate</h2>
+                <p>{Math.round(tempInCelsius)}&deg;C</p>
                 <button 
+                    className="btn"
                     type="button" 
                     onClick={this.getForecast.bind(this)}>
                     Request
