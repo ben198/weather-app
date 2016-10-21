@@ -41,9 +41,7 @@ export default class Weather extends Component {
                 if (err) {
                     throw err;
                 } else {
-                    this.setState({forecast: res.body}, () => {
-                        console.log(this.state.forecast);
-                    });
+                    this.setState({forecast: res.body});
                 }
             })
     }
@@ -54,15 +52,15 @@ export default class Weather extends Component {
         let iconText = transformIconText(this.state.forecast.currently.icon);
         return (
             <div>
-                <h2>Weather at Nuffield Industrial Estate</h2>
-                <div className="container-skycons">
+                <h2 className="title">Weather at Nuffield Industrial Estate</h2>
+                <div className="container-weather">
                     <Skycons
                         color="black"
                         icon={iconText}
                         autoplay={true}/>
+                    <h4>{this.state.forecast.currently.summary}</h4>
+                    <p>{Math.round(tempInCelsius)}&deg;C</p>
                 </div>
-                <h4>{this.state.forecast.currently.summary}</h4>
-                <p>{Math.round(tempInCelsius)}&deg;C</p>
             </div>
         );
     }
