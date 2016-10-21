@@ -12,11 +12,16 @@ export default class Weather extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forecast: {}
+            forecast: {
+                currently: {
+                    temperature: null,
+                    summary: null
+                }
+            }
         }
     }
 
-    getForecast() {
+    componentDidMount() {
         superagent
             .get(`https://api.darksky.net/forecast/${apiKey}/${lat},${lon}`)
             .use(jsonp)
@@ -37,13 +42,8 @@ export default class Weather extends Component {
         return (
             <div>
                 <h2>Weather at Nuffield Industrial Estate</h2>
+                <h4>{this.state.forecast.currently.summary}</h4>
                 <p>{Math.round(tempInCelsius)}&deg;C</p>
-                <button 
-                    className="btn"
-                    type="button" 
-                    onClick={this.getForecast.bind(this)}>
-                    Request
-                </button>
             </div>
         );
     }
